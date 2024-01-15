@@ -17,5 +17,11 @@ data class NewRound(
 data class StartedRound(
     override val survey: RevealedSurvey
 ) : Round {
-    fun buzzIn() {}
+    fun buzzIn(teamPlayer: TeamPlayer, guess: Guess): Guess {
+        println("$teamPlayer buzzed in with: $guess?")
+        if (guess.value == "Foo Bar") {
+            return GoodGuess(guess.value)
+        }
+        return BadGuess(guess.value)
+    }
 }

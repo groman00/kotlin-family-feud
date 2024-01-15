@@ -20,9 +20,21 @@ class DemoApplication {
 
         println("Round 1 created: $round1")
 
-        val round1Started = round1.startRound()
+        val startedRound1 = round1.startRound()
 
-        println("Round 1 started: $round1Started")
+        println("Round 1 started: $startedRound1")
+
+        val team1Player1 = TeamPlayer(team1, team1.players[0])
+        val guess = Guess("Kitchen")
+        val guessResult = startedRound1.buzzIn(
+            team1Player1,
+            guess
+        )
+
+        when(guessResult) {
+            is GoodGuess -> println("Good guess!")
+            is BadGuess -> println("Bad guess!")
+        }
     }
 
     private fun createTeam(name: String): Team {
@@ -40,9 +52,7 @@ class DemoApplication {
         )
         // println("New survey created: ${survey.value}")
 
-        return NewRound(
-            survey
-        )
+        return NewRound(survey)
     }
 }
 
