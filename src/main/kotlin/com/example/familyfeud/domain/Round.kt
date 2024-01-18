@@ -19,9 +19,10 @@ data class StartedRound(
 ) : Round {
     fun buzzIn(teamPlayer: TeamPlayer, guess: Guess): Guess {
         println("$teamPlayer buzzed in with: $guess?")
-        if (guess.value == "Foo Bar") {
+        survey.answers.find { it == guess.value }?.let {
             return GoodGuess(guess.value)
         }
+
         return BadGuess(guess.value)
     }
 }

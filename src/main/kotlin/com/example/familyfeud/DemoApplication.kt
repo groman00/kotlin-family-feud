@@ -26,6 +26,7 @@ class DemoApplication {
 
         val team1Player1 = TeamPlayer(team1, team1.players[0])
         val guess = Guess("Kitchen")
+//        val guess = Guess("BATHROOM")
         val guessResult = startedRound1.buzzIn(
             team1Player1,
             guess
@@ -47,7 +48,7 @@ class DemoApplication {
 
     private fun createRound(): NewRound {
         val survey = NewSurvey(
-            listOf("WORD", "LAUGH", "PIECE OF CAKE/BITE", "DRINK/DROP"),
+            listOf("BATHROOM", "MY BEDROOM", "MY HOUSE", "WORK/OFFICE"),
             "Name a place where you don't like people walking in on you unannounced."
         )
         // println("New survey created: ${survey.value}")
