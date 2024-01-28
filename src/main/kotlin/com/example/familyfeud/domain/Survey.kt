@@ -1,11 +1,16 @@
 package com.example.familyfeud.domain
 
+data class Answer(
+    val ranking: Int,
+    val value: String
+)
+
 sealed interface Survey {
-    val answers: List<String>
+    val answers: List<Answer>
 }
 
 data class NewSurvey(
-    override val answers: List<String>,
+    override val answers: List<Answer>,
     private val value: String
 ) : Survey {
     fun reveal(): RevealedSurvey {
@@ -14,7 +19,7 @@ data class NewSurvey(
 }
 
 data class RevealedSurvey(
-    override val answers: List<String>,
+    override val answers: List<Answer>,
     val value: String
 ) : Survey
 

@@ -5,6 +5,6 @@ open class Team (
 )
 
 data class PlayingTeam(
-     override val players: List<Player>
+    override val players: List<Player>
 ) : Team (players)
 

@@ -11,7 +11,7 @@ class DemoApplication {
         val game = Game(
             Triple("Round 1", "Round 2", "Round 3"),
             host,
-            listOf(team1, team2)
+            Pair(team1, team2)
         )
 
         println("Game created: $game")
@@ -20,22 +20,40 @@ class DemoApplication {
 
         println("Round 1 created: $round1")
 
-        val startedRound1 = round1.startRound()
-
-        println("Round 1 started: $startedRound1")
-
         val team1Player1 = TeamPlayer(team1, team1.players[0])
-        val guess = Guess("Kitchen")
-//        val guess = Guess("BATHROOM")
-        val guessResult = startedRound1.buzzIn(
-            team1Player1,
-            guess
-        )
+        val team2Player1 = TeamPlayer(team2, team2.players[0])
 
-        when(guessResult) {
-            is GoodGuess -> println("Good guess!")
-            is BadGuess -> println("Bad guess!")
-        }
+        println("Round 1: ${team1Player1.player.name} and ${team2Player1.player.name} ready for faceoff")
+
+        val faceOff = round1.startFaceoff()
+
+        println("Round 1 FaceOff: $faceOff")
+
+        faceOff.buzzIn(team1Player1)
+
+        println("Round 1 FaceOff: $faceOff")
+
+        // If good guess, reveal guess.
+            // if best guess, pass or play
+            // else, other team player guesses
+        // else switching guessing team and return
+
+        simulateBestGuessFaceOff(faceOff)
+//        simulateGoodGuessFaceOff(faceOff)
+
+
+        // val guess = Guess("BATHROOM")
+        // val guess = Guess("BATHROOM")
+//        when(guessResult) {
+//            is GoodGuess -> {
+//                println("Good guess! Pass or Play?")
+//            }
+//            is BadGuess -> {
+//                println("Bad Guess. ${team2Player1.player.name} can guess.")
+//
+//                // How do validate that only team 2 can guess?
+//            }
+//        }
     }
 
     private fun createTeam(name: String): Team {
@@ -55,6 +73,21 @@ class DemoApplication {
 
         return NewRound(survey)
     }
+
+    private fun simulateBestGuessFaceOff(faceOff: FaceOff): PlayingRound {
+        // Pass in answer object
+        // Let faceoff determine next state, best guess, good guess
+        // There should be a separate path for bad guess bc the host will call a different mutation
+        faceOff.guess()
+    }
+
+    private fun simulateGoodGuessFaceOff(faceOff: FaceOff) {
+//        faceOff.goodGuess()
+    }
+
+    private fun simulateBadGuessFaceOff() {}
+
+    private fun simulateBothBadGuessFaceOff() {}
 }
 
 fun main() {
